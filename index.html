@@ -39,16 +39,23 @@
     .headline {
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      letter-spacing: 0.12em;
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
       line-height: 1.05;
-      margin-bottom: 0.5rem;
+    }
+
+    .divider {
+      width: 120px;
+      height: 2px;
+      background-color: #111;
+      margin: 1.2rem auto;
+      opacity: 0.85;
     }
 
     .date {
       font-weight: 600;
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      letter-spacing: 0.08em;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      letter-spacing: 0.06em;
     }
   </style>
 </head>
@@ -56,6 +63,7 @@
 <body>
   <div class="container">
     <div class="headline">Coming Soon</div>
+    <div class="divider"></div>
     <div class="date">Live on April 2nd, 2026</div>
   </div>
 </body>
