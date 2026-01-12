@@ -1,39 +1,62 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NOT AVAILABLE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coming Soon</title>
+
   <style>
     html, body {
       height: 100%;
       margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #eae6da; /* gazete kağıdı tonu */
-      background-image: 
-        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.05) 0%, transparent 100%),
-        radial-gradient(circle at 75% 75%, rgba(0,0,0,0.03) 0%, transparent 100%),
-        repeating-linear-gradient(45deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 2px);
-      background-blend-mode: multiply;
     }
 
     body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #eae6da;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.05) 0%, transparent 100%),
+        radial-gradient(circle at 75% 75%, rgba(0,0,0,0.03) 0%, transparent 100%),
+        repeating-linear-gradient(
+          45deg,
+          rgba(0,0,0,0.015) 0px,
+          rgba(0,0,0,0.015) 1px,
+          transparent 1px,
+          transparent 2px
+        );
+      background-blend-mode: multiply;
       font-family: "Playfair Display", Georgia, serif;
       color: #111;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 4px;
       text-align: center;
-      font-size: clamp(2rem, 10vw, 7rem); /* yarı boyut */
-      line-height: 1;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 90vw;
+    }
+
+    .headline {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+    }
+
+    .date {
+      font-weight: 600;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      letter-spacing: 0.08em;
     }
   </style>
 </head>
+
 <body>
-  Live on April 2nd, 2026
+  <div class="container">
+    <div class="headline">Coming Soon</div>
+    <div class="date">Live on April 2nd, 2026</div>
+  </div>
 </body>
 </html>
