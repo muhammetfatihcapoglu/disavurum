@@ -1,48 +1,381 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Live on April 2nd, 2026</title>
-
+  <meta name="description" content="A minimal newspaper-style feed — static, fast, readable." />
+  <title>Dışa Vurum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
+    :root {
+      --paper: #f4efe4;
+      --paper-dark: #e8e0d0;
+      --ink: #14120f;
+      --muted: #5c574e;
+      --rule: #b8ae9a;
+      --accent: #c45c26;
+      --accent-soft: rgba(196, 92, 38, 0.12);
+      --link: #1a4b8c;
+      --max: 52rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--paper);
+      background-image:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, transparent 28%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 27px,
+          rgba(180, 170, 150, 0.08) 27px,
+          rgba(180, 170, 150, 0.08) 28px
+        );
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem;
+    }
+
+    /* Masthead */
+    .masthead {
+      text-align: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.5rem;
+    }
+
+    .masthead__kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.35rem;
+    }
+
+    .masthead__title {
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(2.1rem, 7vw, 3.25rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .masthead__sub {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      background-color: #eae6da;
-      background-image: 
-        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.05) 0%, transparent 100%),
-        radial-gradient(circle at 75% 75%, rgba(0,0,0,0.03) 0%, transparent 100%),
-        repeating-linear-gradient(
-          45deg,
-          rgba(0,0,0,0.015) 0px,
-          rgba(0,0,0,0.015) 1px,
-          transparent 1px,
-          transparent 2px
-        );
-      background-blend-mode: multiply;
-      font-family: "Playfair Display", Georgia, serif;
-      color: #111;
+      gap: 0.5rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .masthead__sub strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .masthead__tagline {
+      font-family: "Newsreader", Georgia, serif;
+      font-style: italic;
+      font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 0.65rem auto 0;
+      max-width: 28rem;
+    }
+
+    .masthead-art {
+      margin: 0 0 1.5rem;
       text-align: center;
     }
 
-    .date {
+    .masthead-art img {
+      display: block;
+      margin: 0 auto;
+      max-width: min(100%, 28rem);
+      height: auto;
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    nav a {
+      color: var(--ink);
+      padding: 0.15rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover {
+      border-bottom-color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    @media (min-width: 720px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr) 11rem;
+        align-items: start;
+      }
+    }
+
+    /* Lead */
+    .lead {
+      border: 1px solid var(--rule);
+      background: linear-gradient(145deg, #fffef9 0%, var(--paper-dark) 100%);
+      padding: 1rem 1.1rem;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .lead__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+    }
+
+    .lead__headline {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.35rem, 3.5vw, 1.75rem);
       font-weight: 700;
-      letter-spacing: 0.08em;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      line-height: 1.1;
-      padding: 0 1rem;
+      line-height: 1.2;
+      margin: 0 0 0.5rem;
+    }
+
+    .lead__headline a {
+      color: inherit;
+    }
+
+    .lead__deck {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* Story list (HN-style) */
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.5rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    ol.stories {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: story;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 2rem minmax(0, 1fr);
+      gap: 0.35rem 0.65rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(184, 174, 154, 0.45);
+      align-items: baseline;
+    }
+
+    .story:last-child {
+      border-bottom: none;
+    }
+
+    .story__rank {
+      counter-increment: story;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .story__rank::before {
+      content: counter(story);
+    }
+
+    .story__body {
+      min-width: 0;
+    }
+
+    .story__title {
+      font-size: 0.98rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .story__title a {
+      color: var(--ink);
+    }
+
+    .story__title a:hover {
+      color: var(--accent);
+    }
+
+    .story__meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .story__meta a {
+      color: var(--muted);
+    }
+
+    .story__meta a:hover {
+      color: var(--link);
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.35rem;
+      border-radius: 2px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 0.35rem;
+      vertical-align: middle;
+    }
+
+    /* Sidebar */
+    aside {
+      font-size: 0.82rem;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      padding: 0.85rem;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    aside h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1rem;
+      margin: 0 0 0.5rem;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    aside p {
+      margin: 0 0 0.65rem;
+    }
+
+    aside p:last-child {
+      margin-bottom: 0;
+    }
+
+    .sidebar__box {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--rule);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      margin: 0 0.25rem 0.25rem 0;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      color: var(--ink);
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
     }
   </style>
 </head>
-
 <body>
-  <div class="date">Live on April 2nd, 2026</div>
+  <div class="wrap">
+    <header class="masthead">
+      
+      <h1 class="masthead__title">disavurum.com</h1>
+      <div class="masthead__sub">
+        <strong id="paper-date"></strong>
+      </div>
+      <p class="masthead__tagline">Kimilerimiz zaman zaman burada dışa vuracağız.       </p>
+    </header>
+
+    <figure class="masthead-art">
+      <img
+        src="assets/masthead-illustration.png"
+        alt="Ağaç altında düşünen adam; ahşap baskı tarzı çizim."
+        width="1024"
+        height="1024"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+
+  </div>
+
+  <script>
+    (function () {
+      var d = new Date();
+      var opts = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+      var el = document.getElementById("paper-date");
+      if (el) el.textContent = d.toLocaleDateString(undefined, opts);
+      var y = document.getElementById("year");
+      if (y) y.textContent = String(d.getFullYear());
+    })();
+  </script>
 </body>
 </html>
